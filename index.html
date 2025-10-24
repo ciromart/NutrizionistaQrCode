@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Apri l'app</title>
+  <style>
+    body{font-family:system-ui,Arial;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#f7f7f7}
+    .card{max-width:420px;padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.08);background:#fff;text-align:center}
+    a.button{display:inline-block;margin:8px;padding:10px 16px;border-radius:8px;text-decoration:none;border:1px solid #ddd}
+  </style>
+</head>
+<body>
+  <div class="card">
+    
+    <h2>Nutrizionista Francesco Esposito</h2>
+    <div>
+	<img src="./assets/logo.jpg" style="width:200px;" />		
+    </div>
+
+    <h2>Apri l’app</h2>
+    <p>Verifichiamo il tuo dispositivo e ti reindirizziamo...</p>
+    <div id="manual" style="display:none">
+      <p>Se non vieni reindirizzato automaticamente, scegli:</p>
+      <a id="btn-ios" class="button" href="#">App Store (iOS)</a>
+      <a id="btn-android" class="button" href="#">Google Play (Android)</a>
+     <!-- <a id="btn-web" class="button" href="#" target="_blank">Visita sito</a> -->
+    </div>
+  </div>
+
+  <script>
+    // Sostituisci qui sotto con i link corretti
+    const IOS_URL = "https://apps.apple.com/it/app/nutrizione-esposito-francesco/id1637327559";
+    const ANDROID_URL = "https://play.google.com/store/apps/details?id=com.nutriespobioappfra.app";
+    //const FALLBACK_URL = "https://barbertreatmentapp.web.app/";
+
+    function isIOS(ua) {
+      return /iPhone|iPad|iPod/.test(ua) || ( /Macintosh/.test(ua) && 'ontouchend' in document );
+    }
+    function isAndroid(ua) { return /Android/.test(ua); }
+
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    if (isIOS(ua)) {
+      window.location.replace(IOS_URL);
+    } else if (isAndroid(ua)) {
+      window.location.replace(ANDROID_URL);
+    } else {
+      // desktop o non riconosciuto -> fallback landing page
+     // window.location.replace(FALLBACK_URL);
+    }
+
+    // fallback manuale (se JS automatico bloccato)
+    document.getElementById('btn-ios').href = IOS_URL;
+    document.getElementById('btn-android').href = ANDROID_URL;
+    //document.getElementById('btn-web').href = FALLBACK_URL;
+    document.getElementById('manual').style.display = 'block';
+  </script>
+</body>
+</html>
